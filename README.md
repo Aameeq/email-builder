@@ -33,24 +33,29 @@ This platform replicates the exact **INSIZE** design layout into discrete, indiv
 
 ---
 
-## 🌐 How to Deploy to Netlify
+## 🌐 Hosting on GitHub Pages (Recommended)
 
-### Option 1: Netlify Drag & Drop (Easiest)
-1. Go to [app.netlify.com](https://app.netlify.com).
-2. Log in and navigate to the **Sites** tab.
-3. Drag and drop this entire folder (`Email template`) directly onto the Netlify deploy zone.
-4. Your site will be live on a secure HTTPS URL in seconds!
+GitHub Pages is the ideal host for this platform because it is 100% free forever, requires no third-party accounts, and automatically serves all template images from GitHub's global CDN:
 
-### Option 2: Netlify CLI
-Run the following in the terminal:
-```bash
-npx netlify deploy --prod
-```
+### Steps to publish:
+1. Create a new repository on [GitHub](https://github.com/new) (e.g. `email-builder`).
+2. Link this local repo and push your code:
+   ```bash
+   git remote add origin https://github.com/<YOUR_USERNAME>/email-builder.git
+   git push -u origin main
+   ```
+3. In your GitHub repository:
+   - Go to **Settings** > **Pages** (in the left sidebar).
+   - Under **Build and deployment** > **Branch**, select `main` branch and `/ (root)` folder.
+   - Click **Save**.
+4. Within 30 seconds, your platform will be live at:
+   `https://<YOUR_USERNAME>.github.io/email-builder/`
 
-### Option 3: Git Repository
-1. Push this folder to GitHub/GitLab.
-2. In Netlify, click **Add new site** > **Import an existing project**.
-3. Select your repository. The included `netlify.toml` will handle configuration automatically.
+> **Automatic Image CDN Bonus:** When running on GitHub Pages, the generator automatically detects your public URL so all email images (logo, microscope, social icons) automatically get permanent public HTTPS URLs like `https://<YOUR_USERNAME>.github.io/email-builder/assets/product_showcase.jpg`!
+
+---
+
+## 🌐 Alternative: Deploying to Netlify
 
 ---
 
