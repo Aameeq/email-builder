@@ -232,7 +232,27 @@ const App = {
     document.getElementById('headerLogoUrlInput').value = this.state.header.logo.url;
     document.getElementById('headerLogoLinkInput').value = this.state.header.logo.link;
     document.getElementById('headerBgColorInput').value = this.state.header.bgColor;
+    document.getElementById('headerLogoFileStatus').style.display = 'none';
     document.getElementById('headerModal').classList.add('active');
+  },
+
+  handleHeaderFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      document.getElementById('headerLogoUrlInput').value = dataUrl;
+      const statusPill = document.getElementById('headerLogoFileStatus');
+      statusPill.innerText = `✓ Loaded: ${file.name}`;
+      statusPill.style.display = 'inline-flex';
+      
+      this.state.header.logo.url = dataUrl;
+      this.render();
+      this.showToast(`Logo loaded from ${file.name}`);
+    };
+    reader.readAsDataURL(file);
   },
 
   saveHeaderSettings() {
@@ -257,7 +277,27 @@ const App = {
     document.getElementById('productImageUrlInput').value = this.state.product.imageUrl;
     document.getElementById('productLinkInput').value = this.state.product.link;
     document.getElementById('productAltInput').value = this.state.product.alt;
+    document.getElementById('productFileStatus').style.display = 'none';
     document.getElementById('productModal').classList.add('active');
+  },
+
+  handleProductFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      document.getElementById('productImageUrlInput').value = dataUrl;
+      const statusPill = document.getElementById('productFileStatus');
+      statusPill.innerText = `✓ Selected: ${file.name} (${Math.round(file.size / 1024)} KB)`;
+      statusPill.style.display = 'inline-flex';
+
+      this.state.product.imageUrl = dataUrl;
+      this.render();
+      this.showToast(`Product image loaded from ${file.name}!`);
+    };
+    reader.readAsDataURL(file);
   },
 
   saveProductSettings() {

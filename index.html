@@ -183,7 +183,17 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Logo Image URL</label>
+          <label class="form-label">Company Logo</label>
+          <!-- Upload from Computer -->
+          <div class="file-upload-zone" onclick="document.getElementById('headerLogoFileInput').click()">
+            <div class="file-upload-icon">📁</div>
+            <div class="file-upload-text">Browse from Computer</div>
+            <div class="file-upload-subtext">Click to pick a new logo file (PNG, JPG, SVG)</div>
+            <div id="headerLogoFileStatus" class="file-selected-pill" style="display: none;"></div>
+          </div>
+          <input type="file" id="headerLogoFileInput" accept="image/*" style="display: none;" onchange="App.handleHeaderFileUpload(event)" />
+
+          <label class="form-label" style="font-size: 12px; margin-top: 8px;">Or Web / Asset URL</label>
           <input type="text" id="headerLogoUrlInput" class="form-control" placeholder="https://example.com/logo.png" />
           <div class="form-help">Enter a public HTTPS image URL or keep local asset path.</div>
         </div>
@@ -212,9 +222,23 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Product Image Public URL</label>
+          <label class="form-label">Change Product Image</label>
+          <!-- Upload from Computer -->
+          <div class="file-upload-zone" onclick="document.getElementById('productFileInput').click()">
+            <div class="file-upload-icon">📁</div>
+            <div class="file-upload-text">Browse & Select Image from Your Computer</div>
+            <div class="file-upload-subtext">Supports PNG, JPG, WebP. Automatically embedded into the email!</div>
+            <div id="productFileStatus" class="file-selected-pill" style="display: none;"></div>
+          </div>
+          <input type="file" id="productFileInput" accept="image/*" style="display: none;" onchange="App.handleProductFileUpload(event)" />
+          
+          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px 12px; font-size: 12px; color: #1e40af; margin-bottom: 12px;">
+            ℹ️ <strong>Desktop Note:</strong> When you pick an image from your computer, it is automatically converted and embedded directly into the HTML email. Recipients will see it on their phones and computers without you needing to host it anywhere!
+          </div>
+
+          <label class="form-label" style="font-size: 12px;">Or Enter Public Web Image URL</label>
           <input type="text" id="productImageUrlInput" class="form-control" placeholder="https://example.com/product-photo.jpg" />
-          <div class="form-help">Enter a public web image URL for optimal email client rendering.</div>
+          <div class="form-help">Enter a public web image URL or use computer browse above.</div>
         </div>
         <div class="form-group">
           <label class="form-label">🎯 Click Destination Link (URL opened when user clicks image)</label>
