@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INSIZE Email Template Builder & HTML Generator</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Application Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <span class="brand-badge">INSIZE</span>
+        <span class="brand-title">Email Builder & HTML Generator</span>
+        <span class="brand-subtitle">GitHub Pages Ready</span>
+      </div>
+
+      <div class="toolbar-actions">
+        <!-- View Toggle -->
+        <div class="device-toggle" title="Switch Preview Device">
+          <button id="viewDesktopBtn" class="device-btn active">
+            🖥️ Desktop
+          </button>
+          <button id="viewMobileBtn" class="device-btn">
+            📱 Mobile
+          </button>
+        </div>
+
+        <!-- Highlight Links Toggle -->
+        <button id="toggleHighlightLinksBtn" class="btn btn-secondary" title="Highlight all clickable links on the template">
+          👁️ Highlight Links
+        </button>
+
+        <!-- Manage All Links Hub -->
+        <button id="openLinkHubBtn" class="btn btn-outline-primary" title="Review and edit all destination links in one place">
+          🔗 Manage All Links (<span id="totalLinksCount">7</span>)
+        </button>
+
+        <!-- Reset Button -->
+        <button id="resetTemplateBtn" class="btn btn-secondary" title="Restore original template defaults">
+          ↺ Reset
+        </button>
+
+        <!-- Primary Action: Generate HTML -->
+        <button id="generateHtmlBtn" class="btn btn-primary" title="Generate production-ready email HTML">
+          🚀 Generate HTML Code
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Help Strip -->
+  <aside class="helper-strip">
+    <div class="helper-strip-content">
+      <span class="helper-badge">Visual Inline Editor</span>
+      <span>Click any <strong>text</strong> to edit inline. Click any <strong>image, logo or social icon</strong> to edit its URL and destination link.</span>
+    </div>
+  </aside>
+
+  <!-- Main Canvas Workspace -->
+  <main class="workspace">
+    <div id="emailCanvasWrapper" class="email-canvas-wrapper">
+      
+      <!-- Mobile Simulated Status Bar (visible only in mobile mode) -->
+      <div class="mobile-frame-header">
+        <span>9:41</span>
+        <span>Mail Preview</span>
+        <span>100% 🔋</span>
+      </div>
+
+      <!-- The Exact Email Template Component -->
+      <div id="emailCard" class="email-card">
+
+        <!-- 1. HEADER SECTION (Logo + Title) -->
+        <div id="headerSection" class="editable-section email-header">
+          <div id="logoWrapper" class="logo-wrapper has-link" data-link-target="https://www.insize.com" title="Click to edit Logo & Link">
+            <img id="logoImg" src="assets/insize_logo.png" alt="INSIZE Logo" class="logo-img" />
+          </div>
+          
+          <div id="headerTitle" class="header-title-text" contenteditable="true" spellcheck="false" title="Click to edit Title">
+            OUR PRODUCT
+          </div>
+
+          <button class="section-edit-pill" onclick="App.openHeaderModal()">
+            ⚙️ Header Settings
+          </button>
+        </div>
+
+        <!-- 2. INTRO BODY SECTION -->
+        <div id="introSection" class="editable-section email-intro-body">
+          <div id="introGreeting" class="intro-greeting" contenteditable="true" spellcheck="false" title="Click to edit Greeting">
+            Dear Valued Partner,
+          </div>
+          <div id="introContent" class="intro-content" contenteditable="true" spellcheck="false" title="Click to edit Paragraph">
+            Customers who inspect PCBs, cutting inserts and other small precision parts need to see and measure in one step – without setting up a computer. The INSIZE ISM-DL300/301 Digital Measuring Microscope is an all-in-one kit: a 1080P, 60 fps live image on a 13.3" screen, measurement software built in, and full control by mouse. Accuracy reaches ±4 µm at 100X.
+          </div>
+          <button class="section-edit-pill" onclick="App.openIntroModal()">
+            🔗 Text Links & Colors
+          </button>
+        </div>
+
+        <!-- 3. PRODUCT SHOWCASE IMAGE -->
+        <div id="productSection" class="editable-section email-product-section">
+          <div id="productCard" class="product-image-card has-link" data-link-target="https://www.insize.com/product/ism-dl300" onclick="App.openProductModal()" title="Click to change Image & Destination Link">
+            <img id="productImg" src="assets/product_showcase.jpg" alt="INSIZE Microscope Showcase" class="product-main-img" />
+            <div id="videoPlayBadge" class="video-play-badge" style="display: none;">
+              <div class="video-play-triangle"></div>
+            </div>
+            <button class="section-edit-pill" onclick="event.stopPropagation(); App.openProductModal()">
+              🖼️ Edit Image & Link
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. KEY FEATURES SECTION -->
+        <div id="featuresSection" class="editable-section email-features-section">
+          <div class="features-box">
+            <div class="features-header-row">
+              <span id="featuresTitle" class="features-title" contenteditable="true" spellcheck="false" title="Click to edit Features Title">
+                Key Features:
+              </span>
+              <button class="add-feature-btn" onclick="App.addFeatureItem()">
+                + Add Feature
+              </button>
+            </div>
+            <div id="featuresList" class="features-list">
+              <!-- Feature items dynamically populated -->
+            </div>
+          </div>
+          <button class="section-edit-pill" onclick="App.openFeaturesModal()">
+            🔗 Section Link & Color
+          </button>
+        </div>
+
+        <!-- 5. SOCIAL MEDIA ICONS SECTION -->
+        <div id="socialSection" class="editable-section email-social-section">
+          <div id="socialInstagram" class="social-icon-btn has-link" data-link-target="https://www.instagram.com/insize_official" onclick="App.openSocialModal('instagram')" title="Click to edit Instagram Link">
+            <img src="assets/icon_instagram.png" alt="Instagram" />
+          </div>
+          <div id="socialLinkedin" class="social-icon-btn has-link" data-link-target="https://www.linkedin.com/company/insize" onclick="App.openSocialModal('linkedin')" title="Click to edit LinkedIn Link">
+            <img src="assets/icon_linkedin.png" alt="LinkedIn" />
+          </div>
+          <div id="socialYoutube" class="social-icon-btn has-link" data-link-target="https://www.youtube.com/@insize" onclick="App.openSocialModal('youtube')" title="Click to edit YouTube Link">
+            <img src="assets/icon_youtube.png" alt="YouTube" />
+          </div>
+          <button class="section-edit-pill" onclick="App.openSocialModal('all')">
+            🔗 Edit Social Links
+          </button>
+        </div>
+
+        <!-- 6. FOOTER BAR -->
+        <div id="footerSection" class="editable-section email-footer-bar">
+          <div id="footerCompanyText" class="has-link" data-link-target="https://www.insize.com" contenteditable="true" spellcheck="false" title="Click to edit Company Name">
+            INSIZE, CO LTD
+          </div>
+          <div id="footerCopyrightText" contenteditable="true" spellcheck="false" title="Click to edit Rights Text">
+            2026 All Rights Reserved
+          </div>
+          <button class="section-edit-pill" onclick="App.openFooterModal()">
+            🔗 Footer Link
+          </button>
+        </div>
+
+      </div>
+      <!-- End Email Card -->
+
+    </div>
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Header & Logo Modal -->
+  <div id="headerModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">🏷️ Header & Logo Settings</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Logo Image URL</label>
+          <input type="text" id="headerLogoUrlInput" class="form-control" placeholder="https://example.com/logo.png" />
+          <div class="form-help">Enter a public HTTPS image URL or keep local asset path.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Logo Destination Link (where clicking the logo goes)</label>
+          <input type="text" id="headerLogoLinkInput" class="form-control" placeholder="https://www.insize.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Header Background Color</label>
+          <input type="color" id="headerBgColorInput" class="form-control" style="height: 42px; padding: 4px;" value="#00664c" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="App.saveHeaderSettings()">Save Header</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Product Image & Link Modal -->
+  <div id="productModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">🖼️ Product Image & Clickable Link</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Product Image Public URL</label>
+          <input type="text" id="productImageUrlInput" class="form-control" placeholder="https://example.com/product-photo.jpg" />
+          <div class="form-help">Enter a public web image URL for optimal email client rendering.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">🎯 Click Destination Link (URL opened when user clicks image)</label>
+          <input type="text" id="productLinkInput" class="form-control" placeholder="https://www.youtube.com/watch?v=... or https://insize.com/product/..." />
+          <div class="form-help">This solves the single-image problem: the image links directly to this destination!</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Image Alt Text (for accessibility & email previews)</label>
+          <input type="text" id="productAltInput" class="form-control" placeholder="INSIZE Digital Microscope" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="App.saveProductSettings()">Save Product Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Social Media Links Modal -->
+  <div id="socialModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">📱 Social Media Icons & Profiles</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">📸 Instagram Profile Link</label>
+          <input type="text" id="socialInstagramLinkInput" class="form-control" placeholder="https://www.instagram.com/insize" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">💼 LinkedIn Profile / Company Link</label>
+          <input type="text" id="socialLinkedinLinkInput" class="form-control" placeholder="https://www.linkedin.com/company/insize" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">▶️ YouTube Channel / Video Link</label>
+          <input type="text" id="socialYoutubeLinkInput" class="form-control" placeholder="https://www.youtube.com/@insize" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="App.saveSocialSettings()">Save Social Links</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Footer Modal -->
+  <div id="footerModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">📄 Footer Settings</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Company Website Link</label>
+          <input type="text" id="footerCompanyLinkInput" class="form-control" placeholder="https://www.insize.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Footer Background Color</label>
+          <input type="color" id="footerBgColorInput" class="form-control" style="height: 42px; padding: 4px;" value="#d6e6e5" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="App.saveFooterSettings()">Save Footer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Link Hub / Auditor Modal (Directly solves the multi-link struggle) -->
+  <div id="linkHubModal" class="modal-overlay">
+    <div class="modal-window large">
+      <div class="modal-header">
+        <h3 class="modal-title">🔗 Central Link Manager & Auditor</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--gray-700); margin-bottom: 16px;">
+          Manage and verify every single destination link in your email template in one organized dashboard. Click <strong>Test ↗</strong> to verify each URL before sending.
+        </p>
+        <div style="overflow-x: auto;">
+          <table class="link-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Email Segment</th>
+                <th style="width: 60%;">Destination URL</th>
+                <th style="width: 15%; text-align: center;">Verify</th>
+              </tr>
+            </thead>
+            <tbody id="linkHubTableBody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Close</button>
+        <button class="btn btn-primary" onclick="App.saveAllLinksFromHub()">Apply All Link Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Generate HTML Code Output Modal -->
+  <div id="htmlOutputModal" class="modal-overlay">
+    <div class="modal-window large">
+      <div class="modal-header">
+        <h3 class="modal-title">⚡ Generated Production HTML Email Code</h3>
+        <button class="modal-close-btn" onclick="App.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div style="font-size: 13px; color: var(--gray-700);">
+            ✅ <strong>Email-Client Ready:</strong> Outlook tables, Gmail inline styles, Apple Mail retina support.
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline-primary" onclick="App.openFullPreviewTab()">
+              ↗️ Preview Full Page
+            </button>
+            <button class="btn btn-secondary" onclick="App.downloadHtmlFile()">
+              💾 Download .html File
+            </button>
+            <button class="btn btn-primary" onclick="App.copyHtmlCode()">
+              📋 Copy HTML Code
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label class="form-label" style="font-size: 12px;">Public Base Asset URL (Optional: Prepend custom CDN / Netlify domain to relative images)</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="htmlBaseUrlInput" class="form-control" style="font-size: 12px;" placeholder="e.g. https://my-email-app.netlify.app" />
+            <button class="btn btn-secondary" onclick="App.refreshGeneratedCode()" style="white-space: nowrap;">Update Code</button>
+          </div>
+        </div>
+
+        <pre id="htmlCodeOutput" class="code-preview-box"></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeModals()">Close</button>
+        <button class="btn btn-primary" onclick="App.copyHtmlCode()">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Alert -->
+  <div id="toast" class="toast toast-success">
+    <span id="toastMessage">Action completed!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/defaultData.js"></script>
+  <script src="js/emailGenerator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
