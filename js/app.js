@@ -129,6 +129,12 @@ const App = {
     this.renderFeatures();
 
     // 5. Social
+    const fbEl = document.getElementById('socialFacebook');
+    if (fbEl) {
+      fbEl.setAttribute('data-link-target', this.state.social.facebook ? this.state.social.facebook.link : '');
+      fbEl.style.display = (this.state.social.facebook && this.state.social.facebook.active) ? 'inline-flex' : 'none';
+    }
+
     const igEl = document.getElementById('socialInstagram');
     igEl.setAttribute('data-link-target', this.state.social.instagram.link);
     igEl.style.display = this.state.social.instagram.active ? 'inline-flex' : 'none';
@@ -208,6 +214,7 @@ const App = {
     if (this.state.header.logo.link) count++;
     if (this.state.product.link) count++;
     if (this.state.features.link) count++;
+    if (this.state.social.facebook && this.state.social.facebook.active && this.state.social.facebook.link) count++;
     if (this.state.social.instagram.active && this.state.social.instagram.link) count++;
     if (this.state.social.linkedin.active && this.state.social.linkedin.link) count++;
     if (this.state.social.youtube.active && this.state.social.youtube.link) count++;
@@ -277,16 +284,26 @@ const App = {
   },
 
   openSocialModal(target) {
+    document.getElementById('socialFacebookLinkInput').value = this.state.social.facebook ? this.state.social.facebook.link : '';
     document.getElementById('socialInstagramLinkInput').value = this.state.social.instagram.link;
     document.getElementById('socialLinkedinLinkInput').value = this.state.social.linkedin.link;
     document.getElementById('socialYoutubeLinkInput').value = this.state.social.youtube.link;
+    document.getElementById('socialYoutubeActiveCheckbox').checked = this.state.social.youtube.active;
     document.getElementById('socialModal').classList.add('active');
   },
 
   saveSocialSettings() {
+    if (!this.state.social.facebook) {
+      this.state.social.facebook = { active: true, iconUrl: 'assets/icon_facebook.png', link: '', alt: 'Facebook' };
+    }
+    const fbLink = document.getElementById('socialFacebookLinkInput').value.trim();
+    this.state.social.facebook.link = fbLink;
+    this.state.social.facebook.active = Boolean(fbLink);
+
     this.state.social.instagram.link = document.getElementById('socialInstagramLinkInput').value.trim();
     this.state.social.linkedin.link = document.getElementById('socialLinkedinLinkInput').value.trim();
     this.state.social.youtube.link = document.getElementById('socialYoutubeLinkInput').value.trim();
+    this.state.social.youtube.active = document.getElementById('socialYoutubeActiveCheckbox').checked;
 
     this.render();
     this.closeModals();
@@ -317,10 +334,11 @@ const App = {
       { name: '1. Header Logo', key: 'header_logo', url: this.state.header.logo.link, tag: 'Header' },
       { name: '2. Product Showcase Banner', key: 'product_link', url: this.state.product.link, tag: 'Media' },
       { name: '3. Key Features Section', key: 'features_link', url: this.state.features.link, tag: 'Content' },
-      { name: '4. Instagram Profile', key: 'social_ig', url: this.state.social.instagram.link, tag: 'Social' },
-      { name: '5. LinkedIn Profile', key: 'social_li', url: this.state.social.linkedin.link, tag: 'Social' },
-      { name: '6. YouTube Channel / Video', key: 'social_yt', url: this.state.social.youtube.link, tag: 'Social' },
-      { name: '7. Footer Company Name', key: 'footer_link', url: this.state.footer.companyLink, tag: 'Footer' }
+      { name: '4. Facebook Page', key: 'social_fb', url: this.state.social.facebook ? this.state.social.facebook.link : '', tag: 'Social' },
+      { name: '5. Instagram Profile', key: 'social_ig', url: this.state.social.instagram.link, tag: 'Social' },
+      { name: '6. LinkedIn Profile', key: 'social_li', url: this.state.social.linkedin.link, tag: 'Social' },
+      { name: '7. YouTube Channel (Optional)', key: 'social_yt', url: this.state.social.youtube.link, tag: 'Social' },
+      { name: '8. Footer Company Name', key: 'footer_link', url: this.state.footer.companyLink, tag: 'Footer' }
     ];
 
     linksList.forEach(item => {
@@ -354,6 +372,13 @@ const App = {
         case 'header_logo': this.state.header.logo.link = val; break;
         case 'product_link': this.state.product.link = val; break;
         case 'features_link': this.state.features.link = val; break;
+        case 'social_fb': 
+          if (!this.state.social.facebook) {
+            this.state.social.facebook = { active: true, iconUrl: 'assets/icon_facebook.png', link: '', alt: 'Facebook' };
+          }
+          this.state.social.facebook.link = val;
+          this.state.social.facebook.active = Boolean(val);
+          break;
         case 'social_ig': this.state.social.instagram.link = val; break;
         case 'social_li': this.state.social.linkedin.link = val; break;
         case 'social_yt': this.state.social.youtube.link = val; break;

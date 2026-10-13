@@ -358,21 +358,27 @@ body.highlight-links .has-link::after {
 }
 
 /* Stagger social icons badges so they do not overlap */
-body.highlight-links #socialInstagram::after {
+body.highlight-links #socialFacebook::after {
   bottom: -24px;
-  left: -20px;
+  left: -15px;
   transform: none;
 }
 
+body.highlight-links #socialInstagram::after {
+  bottom: -42px;
+  left: 35%;
+  transform: translateX(-50%);
+}
+
 body.highlight-links #socialLinkedin::after {
-  bottom: -40px;
-  left: 50%;
+  bottom: -24px;
+  left: 65%;
   transform: translateX(-50%);
 }
 
 body.highlight-links #socialYoutube::after {
-  bottom: -24px;
-  right: -20px;
+  bottom: -42px;
+  right: -15px;
   left: auto;
   transform: none;
 }

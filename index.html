@@ -136,10 +136,13 @@
 
         <!-- 5. SOCIAL MEDIA ICONS SECTION -->
         <div id="socialSection" class="editable-section email-social-section">
-          <div id="socialInstagram" class="social-icon-btn has-link" data-link-target="https://www.instagram.com/insize_official" onclick="App.openSocialModal('instagram')" title="Click to edit Instagram Link">
+          <div id="socialFacebook" class="social-icon-btn has-link" data-link-target="https://web.facebook.com/insizepakistan/" onclick="App.openSocialModal('facebook')" title="Click to edit Facebook Link">
+            <img src="assets/icon_facebook.png" alt="Facebook" />
+          </div>
+          <div id="socialInstagram" class="social-icon-btn has-link" data-link-target="https://www.instagram.com/insizepakistan" onclick="App.openSocialModal('instagram')" title="Click to edit Instagram Link">
             <img src="assets/icon_instagram.png" alt="Instagram" />
           </div>
-          <div id="socialLinkedin" class="social-icon-btn has-link" data-link-target="https://www.linkedin.com/company/insize" onclick="App.openSocialModal('linkedin')" title="Click to edit LinkedIn Link">
+          <div id="socialLinkedin" class="social-icon-btn has-link" data-link-target="https://www.linkedin.com/company/insize-pakistan" onclick="App.openSocialModal('linkedin')" title="Click to edit LinkedIn Link">
             <img src="assets/icon_linkedin.png" alt="LinkedIn" />
           </div>
           <div id="socialYoutube" class="social-icon-btn has-link" data-link-target="https://www.youtube.com/@insize" onclick="App.openSocialModal('youtube')" title="Click to edit YouTube Link">
@@ -239,16 +242,26 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
+          <label class="form-label">🌐 Facebook Page Link</label>
+          <input type="text" id="socialFacebookLinkInput" class="form-control" placeholder="https://web.facebook.com/insizepakistan/" />
+        </div>
+        <div class="form-group">
           <label class="form-label">📸 Instagram Profile Link</label>
-          <input type="text" id="socialInstagramLinkInput" class="form-control" placeholder="https://www.instagram.com/insize" />
+          <input type="text" id="socialInstagramLinkInput" class="form-control" placeholder="https://www.instagram.com/insizepakistan" />
         </div>
         <div class="form-group">
           <label class="form-label">💼 LinkedIn Profile / Company Link</label>
-          <input type="text" id="socialLinkedinLinkInput" class="form-control" placeholder="https://www.linkedin.com/company/insize" />
+          <input type="text" id="socialLinkedinLinkInput" class="form-control" placeholder="https://www.linkedin.com/company/insize-pakistan" />
         </div>
         <div class="form-group">
           <label class="form-label">▶️ YouTube Channel / Video Link</label>
           <input type="text" id="socialYoutubeLinkInput" class="form-control" placeholder="https://www.youtube.com/@insize" />
+          <div style="margin-top: 6px;">
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--gray-700); cursor: pointer;">
+              <input type="checkbox" id="socialYoutubeActiveCheckbox" checked /> 
+              Include YouTube icon in email (uncheck if client does not need it)
+            </label>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

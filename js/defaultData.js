@@ -49,17 +49,23 @@ const DEFAULT_EMAIL_DATA = {
   },
   social: {
     bgColor: '#fcfcf7',
+    facebook: {
+      active: true,
+      iconUrl: 'assets/icon_facebook.png',
+      link: 'https://web.facebook.com/insizepakistan/',
+      alt: 'Follow INSIZE Pakistan on Facebook'
+    },
     instagram: {
       active: true,
       iconUrl: 'assets/icon_instagram.png',
-      link: 'https://www.instagram.com/insize_official',
-      alt: 'Follow INSIZE on Instagram'
+      link: 'https://www.instagram.com/insizepakistan',
+      alt: 'Follow INSIZE Pakistan on Instagram'
     },
     linkedin: {
       active: true,
       iconUrl: 'assets/icon_linkedin.png',
-      link: 'https://www.linkedin.com/company/insize',
-      alt: 'Connect with INSIZE on LinkedIn'
+      link: 'https://www.linkedin.com/company/insize-pakistan',
+      alt: 'Connect with INSIZE Pakistan on LinkedIn'
     },
     youtube: {
       active: true,

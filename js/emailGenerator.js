@@ -39,9 +39,18 @@ function generateEmailHTML(data, options = {}) {
 
   // Build social icons
   const socialIconsList = [];
+  if (data.social.facebook && data.social.facebook.active) {
+    socialIconsList.push(`
+      <td align="center" style="padding: 0 10px;">
+        <a href="${data.social.facebook.link || '#'}" target="_blank" style="text-decoration: none; display: inline-block;">
+          <img src="${getImgUrl(data.social.facebook.iconUrl)}" alt="${data.social.facebook.alt || 'Facebook'}" width="38" height="38" style="display: block; width: 38px; height: 38px; border: 0; outline: none; border-radius: 9px;" />
+        </a>
+      </td>
+    `);
+  }
   if (data.social.instagram.active) {
     socialIconsList.push(`
-      <td align="center" style="padding: 0 12px;">
+      <td align="center" style="padding: 0 10px;">
         <a href="${data.social.instagram.link || '#'}" target="_blank" style="text-decoration: none; display: inline-block;">
           <img src="${getImgUrl(data.social.instagram.iconUrl)}" alt="${data.social.instagram.alt || 'Instagram'}" width="38" height="38" style="display: block; width: 38px; height: 38px; border: 0; outline: none; border-radius: 9px;" />
         </a>
@@ -50,7 +59,7 @@ function generateEmailHTML(data, options = {}) {
   }
   if (data.social.linkedin.active) {
     socialIconsList.push(`
-      <td align="center" style="padding: 0 12px;">
+      <td align="center" style="padding: 0 10px;">
         <a href="${data.social.linkedin.link || '#'}" target="_blank" style="text-decoration: none; display: inline-block;">
           <img src="${getImgUrl(data.social.linkedin.iconUrl)}" alt="${data.social.linkedin.alt || 'LinkedIn'}" width="38" height="38" style="display: block; width: 38px; height: 38px; border: 0; outline: none; border-radius: 9px;" />
         </a>
@@ -59,7 +68,7 @@ function generateEmailHTML(data, options = {}) {
   }
   if (data.social.youtube.active) {
     socialIconsList.push(`
-      <td align="center" style="padding: 0 12px;">
+      <td align="center" style="padding: 0 10px;">
         <a href="${data.social.youtube.link || '#'}" target="_blank" style="text-decoration: none; display: inline-block;">
           <img src="${getImgUrl(data.social.youtube.iconUrl)}" alt="${data.social.youtube.alt || 'YouTube'}" width="46" height="38" style="display: block; width: 46px; height: 38px; border: 0; outline: none; border-radius: 9px;" />
         </a>
